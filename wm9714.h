@@ -1,7 +1,7 @@
 #ifndef _WM9714_H
 #define _WM9714_H
 
-#define SNDRV_DEFAULT_IDX 1
+#define SNDRV_DEFAULT_IDX -1
 #define BUS_ADDR       0x7f001000 /* Base address of ac97 bus*/
 #define AC_GLBCTRL     0x00       /* AC97 Global Control Register */
 #define AC_GLBSTAT     0x04       /* AC97 Global Status Register */
@@ -29,9 +29,10 @@ struct wm9714_chip{
     void __iomem *reg;
     unsigned long bus_addr;
     size_t reg_size;
-    enum dma_ch dmach_pcmout;
-    enum dma_ch dmach_pcmin;
-    enum dma_ch dmach_micin;
+    enum dam_ch channel;
+    /* enum dma_ch dmach_pcmout; */
+    /* enum dma_ch dmach_pcmin; */
+    /* enum dma_ch dmach_micin; */
 };
 
 /* unsigned short s3c_ac97_read(struct wm9714_chip *chip,unsigned short reg); */

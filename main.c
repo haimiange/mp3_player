@@ -66,13 +66,16 @@ static int __devinit s3c6410_wm9714_probe(struct platform_device *dev)
 	printk(KERN_ERR "%s: No memory for wm9714 chip struct\n",__func__);
 	return ret;
     }
+    mutex_init(&chip->lock);
     chip->bus_addr = BUS_ADDR;
     chip->reg_size = REG_SIZE;
-    chip->dmach_pcmout = PCMOUT_CH;
-    chip->dmach_pcmin = PCMIN_CH;
-    chip->dmach_micin = MICIN_CH;
-    mutex_init(&chip->lock);
+    chip->channel = PCMOUT_CH;
+    
+    /* chip->dmach_pcmout = PCMOUT_CH; */
+    /* chip->dmach_pcmin = PCMIN_CH; */
+    /* chip->dmach_micin = MICIN_CH; */
     printk(KERN_ERR "%s: ioremap\n",__func__);
+    chip->reg = NULL;
     chip->reg = ioremap(chip->bus_addr,chip->reg_size);
     if (chip->reg == NULL) {
 	printk(KERN_ERR "%s: Unable to ioremap register region\n",__func__);
